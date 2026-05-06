@@ -1,0 +1,16 @@
+CREATE TABLE orders_cleaned AS
+SELECT
+    order_id,
+
+    -- Clean text fields
+    TRIM(REPLACE(REPLACE(LOWER(order_status), '\r', ''), '\n', '')) AS order_status,
+
+    TRIM(customer_name) AS customer_name,
+    TRIM(city) AS city,
+
+    -- Keep numeric clean
+    price,
+    quantity,
+    revenue
+
+FROM orders_raw;
